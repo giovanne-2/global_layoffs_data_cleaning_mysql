@@ -33,6 +33,14 @@ Prepare the dataset by:
 
 ---
 
+## 📂 Project Structure
+layoffs-data-cleaning/
+├── README.md
+├── data_cleaning_layoffs.sql
+└── layoffs.csv
+
+---
+
 ## 🔄 Data Cleaning Process
 
 ### 1. Creating a Staging Table

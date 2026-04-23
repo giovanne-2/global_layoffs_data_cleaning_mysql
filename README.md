@@ -1,5 +1,4 @@
 # 🧹 Layoffs Data Cleaning Project (MySQL)
-
 ![SQL](https://img.shields.io/badge/SQL-MySQL-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![Focus](https://img.shields.io/badge/Focus-Data%20Cleaning-orange)
@@ -9,7 +8,6 @@
 ## 📖 About the Project
 
 This project focuses on cleaning and preparing a layoffs dataset for further analysis.
-
 The goal was to transform raw data into a structured, consistent, and reliable dataset that can be confidently used for exploration, visualization, or modeling.
 
 ---
@@ -34,10 +32,13 @@ Prepare the dataset by:
 ---
 
 ## 📂 Project Structure
+
+```
 layoffs-data-cleaning/
 ├── README.md
 ├── data_cleaning_layoffs.sql
 └── layoffs.csv
+```
 
 ---
 
@@ -45,9 +46,8 @@ layoffs-data-cleaning/
 
 ### 1. Creating a Staging Table
 
-```sql id="a1s9df"
+```sql
 CREATE TABLE layoffs_staging LIKE layoffs;
-
 INSERT INTO layoffs_staging
 SELECT * FROM layoffs;
 ```
@@ -60,7 +60,7 @@ This ensures the original dataset remains unchanged while all transformations ar
 
 Duplicates were identified using a window function:
 
-```sql id="s9d8f7"
+```sql
 ROW_NUMBER() OVER (
     PARTITION BY company, location, industry, 
                  total_laid_off, percentage_laid_off, date,
@@ -86,7 +86,7 @@ Several adjustments were made to improve consistency:
 
 Dates were converted from text format into proper `DATE` format:
 
-```sql id="j3k2l1"
+```sql
 STR_TO_DATE(date, '%m/%d/%Y')
 ```
 
@@ -103,7 +103,7 @@ STR_TO_DATE(date, '%m/%d/%Y')
 
 Rows without meaningful layoff information were removed:
 
-```sql id="l2k3j4"
+```sql
 DELETE
 FROM layoffs_staging2
 WHERE total_laid_off IS NULL
